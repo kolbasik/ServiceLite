@@ -20,6 +20,9 @@ namespace DevdayDemo
     {
         public void Register(IAppHost appHost)
         {
+            // Ensure that the X-AspNetMvc-Version HTTP header is not
+            //MvcHandler.DisableMvcResponseHeader = true;
+
             ConfigureViewEngines();
             ConfigureAntiForgeryTokens();
 
