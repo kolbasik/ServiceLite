@@ -2,7 +2,7 @@ namespace DevdayDemo.ServiceLite.Core
 {
     public abstract class Plugin
     {
-        public virtual void Configure(IServiceCollection container)
+        public virtual void Configure(IAppHost appHost, IServiceCollection container)
         {
         }
 

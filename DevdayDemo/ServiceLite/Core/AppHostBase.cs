@@ -10,10 +10,12 @@ namespace DevdayDemo.ServiceLite.Core
 
         public AppHostBase()
         {
+            Properties = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Plugins = new List<Plugin>();
             Instance = this;
         }
 
+        public IDictionary<string, object> Properties { get; }
         public List<Plugin> Plugins { get; }
         public IServiceProvider Container { get; private set; }
 
@@ -41,7 +43,7 @@ namespace DevdayDemo.ServiceLite.Core
             foreach (var plugin in Plugins)
                 try
                 {
-                    plugin.Configure(container);
+                    plugin.Configure(this, container);
                 }
                 catch (Exception ex)
                 {

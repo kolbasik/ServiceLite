@@ -1,4 +1,6 @@
-﻿namespace DevdayDemo
+﻿using System.Web.Http;
+
+namespace DevdayDemo
 {
     using System.Web.Mvc;
     using Boilerplate.Web.Mvc;

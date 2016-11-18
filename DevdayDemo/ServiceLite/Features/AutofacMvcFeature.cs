@@ -18,7 +18,7 @@ namespace DevdayDemo.ServiceLite.Features
 
         public List<Assembly> Assemblies { get; }
 
-        public override void Configure(IServiceCollection container)
+        public override void Configure(IAppHost appHost, IServiceCollection container)
         {
             var builder = ((AutofacServiceCollection) container).Builder;
             var assemblies = Assemblies.ToArray();
@@ -41,12 +41,12 @@ namespace DevdayDemo.ServiceLite.Features
         {
             var container = ((AutofacServiceProvider) appHost.Container).Container;
 
-            var app = (IAppBuilder) appHost.Container.GetService(typeof(IAppBuilder));
-            app.UseAutofacMiddleware(container);
-            app.UseAutofacMvc();
-
             // Sets the ASP.NET MVC dependency resolver.
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            var app = appHost.Get<IAppBuilder>();
+            app.UseAutofacMiddleware(container);
+            app.UseAutofacMvc();
         }
     }
 }
