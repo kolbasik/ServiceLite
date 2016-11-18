@@ -17,7 +17,7 @@ namespace DevdayDemo.ServiceLite.Core
         public List<Plugin> Plugins { get; }
         public IServiceProvider Container { get; private set; }
 
-        public AppHostBase Use(IServiceCollection container)
+        public virtual AppHostBase Use(IServiceCollection container)
         {
             Configure(container);
             ConfigurePlugins(container);
@@ -25,9 +25,9 @@ namespace DevdayDemo.ServiceLite.Core
             return this;
         }
 
-        public AppHostBase Start()
+        public virtual AppHostBase Start()
         {
-            if (Container == null) Use(new DefaultServiceCollection());
+            if (Container == null) throw new NotSupportedException("Please ensure that .Use(IServiceCollection container) method was called.");
             RegisterPlugins();
             return this;
         }

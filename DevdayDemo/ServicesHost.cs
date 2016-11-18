@@ -1,6 +1,8 @@
-﻿using DevdayDemo.ServiceLite.Core;
+﻿using DevdayDemo.ServiceLite.Autofac;
+using DevdayDemo.ServiceLite.Core;
 using DevdayDemo.ServiceLite.Features;
 using DevdayDemo.Services;
+using Owin;
 
 namespace DevdayDemo
 {
@@ -10,6 +12,13 @@ namespace DevdayDemo
         {
             Plugins.Add(new MvcFeature());
             Plugins.Add(new AutofacMvcFeature());
+        }
+
+        public AppHostBase Use(IAppBuilder app)
+        {
+            var container = new AutofacServiceCollection();
+            container.AddInstance(app);
+            return Use(container);
         }
 
         protected override void Configure(IServiceCollection container)

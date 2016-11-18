@@ -11,9 +11,7 @@ namespace DevdayDemo
     {
         public void Configuration(IAppBuilder app)
         {
-            var autofac = new AutofacServiceCollection();
-            autofac.AddInstance(app);
-            new ServicesHost().Use(autofac).Start();
+            new ServicesHost().Use(app).Start();
         }
     }
 }
