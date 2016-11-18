@@ -7,11 +7,6 @@
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        protected void Application_Start()
-        {
-            new ServicesHost().Init();
-        }
-
         /// <summary>
         /// Handles the Content Security Policy (CSP) violation errors. For more information see FilterConfig.
         /// </summary>
