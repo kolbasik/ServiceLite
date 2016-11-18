@@ -1,52 +1,26 @@
-﻿using System.Reflection;
-using System.Web.Helpers;
+﻿using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Autofac;
-using Autofac.Integration.Mvc;
 using Boilerplate.Web.Mvc;
-using DevdayDemo.ServiceLite.Autofac;
 using DevdayDemo.ServiceLite.Core;
-using Owin;
 
 namespace DevdayDemo.ServiceLite.Features
 {
-    public sealed class MvcFeature : IPlugin
+    public sealed class MvcFeature : Plugin
     {
-        public void Configure(IServiceCollection container)
-        {
-            var builder = ((AutofacServiceCollection) container).Builder;
-
-            // Register Common MVC Types
-            builder.RegisterModule<AutofacWebTypesModule>();
-
-            // Register MVC Filters
-            builder.RegisterFilterProvider();
-
-            // Register MVC Controllers
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-        }
-
-        public void Register(IAppHost appHost)
+        public override void Register(IAppHost appHost)
         {
             // Ensure that the X-AspNetMvc-Version HTTP header is not
-            //MvcHandler.DisableMvcResponseHeader = true;
+            MvcHandler.DisableMvcResponseHeader = true;
 
-            ConfigureViewEngines();
+            ConfigureViewEngines(ViewEngines.Engines);
             ConfigureAntiForgeryTokens();
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-
-            var autofac = ((AutofacServiceProvider) appHost.Container).Container;
-            SetMvcDependencyResolver(autofac);
-
-            var app = (IAppBuilder) appHost.Container.GetService(typeof(IAppBuilder));
-            app.UseAutofacMiddleware(autofac);
-            app.UseAutofacMvc();
         }
 
         /// <summary>
@@ -55,10 +29,10 @@ namespace DevdayDemo.ServiceLite.Features
         ///     engines you are not using here for better performance and include a custom Razor view engine that only
         ///     supports C#.
         /// </summary>
-        private static void ConfigureViewEngines()
+        private static void ConfigureViewEngines(ViewEngineCollection viewEngines)
         {
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new CSharpRazorViewEngine());
+            viewEngines.Clear();
+            viewEngines.Add(new CSharpRazorViewEngine());
         }
 
         /// <summary>
@@ -77,15 +51,6 @@ namespace DevdayDemo.ServiceLite.Features
             // If you have enabled SSL. Uncomment this line to ensure that the Anti-Forgery
             // cookie requires SSL to be sent across the wire.
             // AntiForgeryConfig.RequireSsl = true;
-        }
-
-        /// <summary>
-        /// Sets the ASP.NET MVC dependency resolver.
-        /// </summary>
-        /// <param name="container">The container.</param>
-        private static void SetMvcDependencyResolver(IContainer container)
-        {
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }

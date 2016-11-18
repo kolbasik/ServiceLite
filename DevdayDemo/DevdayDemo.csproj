@@ -181,7 +181,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Container.cs" />
     <Compile Include="Constants\Application.cs" />
     <Compile Include="Constants\CacheSetting.cs" />
     <Compile Include="Constants\CacheProfileName.cs" />
@@ -196,6 +195,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ServiceLite\Core\DefaultServiceCollection.cs" />
+    <Compile Include="ServiceLite\Core\IAppHost.cs" />
+    <Compile Include="ServiceLite\Core\IServiceCollection.cs" />
+    <Compile Include="ServiceLite\Core\Plugin.cs" />
+    <Compile Include="ServiceLite\Features\AutofacMvcFeature.cs" />
     <Compile Include="ServiceLite\Features\MvcFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLite\Autofac\AutofacServiceCollection.cs" />

@@ -4,13 +4,12 @@ using DevdayDemo.Services;
 
 namespace DevdayDemo
 {
-    public class ServicesHost : AppHostBase
+    public sealed class ServicesHost : AppHostBase
     {
-        public static ServicesHost Instance;
-
         public ServicesHost()
         {
             Plugins.Add(new MvcFeature());
+            Plugins.Add(new AutofacMvcFeature());
         }
 
         protected override void Configure(IServiceCollection container)
