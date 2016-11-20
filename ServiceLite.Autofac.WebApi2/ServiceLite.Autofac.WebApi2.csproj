@@ -70,10 +70,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceLite.Autofac.Core\ServiceLite.Autofac.Core.csproj">
-      <Project>{20C54719-17F6-4479-85BB-817BB6198585}</Project>
-      <Name>ServiceLite.Autofac.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ServiceLite.Core\ServiceLite.Core.csproj">
       <Project>{6EAC398A-1D86-4C9C-BC18-9427CAFC0149}</Project>
       <Name>ServiceLite.Core</Name>

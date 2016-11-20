@@ -18,6 +18,7 @@ namespace DevdayDemo
     {
         public ServicesHost()
         {
+            Plugins.Add(new AutofacFeature());
             Plugins.Add(new AutofacWebApiFeature());
             Plugins.Add(new WebApiFeature());
             Plugins.Add(new SwaggerFeature { ApiVersions = { { "v1", "Application V1" }, { "v2", "Application V2" } } });

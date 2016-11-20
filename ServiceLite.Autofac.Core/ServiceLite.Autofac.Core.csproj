@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutofacFeature.cs" />
     <Compile Include="AutofacServiceCollection.cs" />
     <Compile Include="AutofacServiceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

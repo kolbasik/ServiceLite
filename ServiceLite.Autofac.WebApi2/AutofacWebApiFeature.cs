@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Http;
+using Autofac;
 using Autofac.Integration.WebApi;
-using ServiceLite.Autofac.Core;
 using ServiceLite.Core;
 
 namespace ServiceLite.Autofac.WebApi2
@@ -18,7 +18,7 @@ namespace ServiceLite.Autofac.WebApi2
 
         public void Configure(ConfigurationContext context)
         {
-            var builder = ((AutofacServiceCollection)context.ServiceCollection).Builder;
+            var builder = context.AppHost.Get<ContainerBuilder>();
             var assemblies = Assemblies.ToArray();
 
             // Register your Web API controllers.
@@ -30,7 +30,7 @@ namespace ServiceLite.Autofac.WebApi2
 
         public void PostConfigure(ConfigurationContext context)
         {
-            var container = ((AutofacServiceProvider)context.AppHost.Container).Container;
+            var container = context.AppHost.Get<IContainer>();
             var config = context.AppHost.Get<HttpConfiguration>();
 
             // Set the dependency resolver to be Autofac.
