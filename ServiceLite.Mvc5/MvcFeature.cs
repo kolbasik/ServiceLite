@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using ServiceLite.Core;
 
-namespace ServiceLite.Mvc
+namespace ServiceLite.Mvc5
 {
     public sealed class MvcFeature : IPlugin
     {

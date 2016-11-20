@@ -8,9 +8,9 @@ using ServiceLite.Autofac.Core;
 using ServiceLite.Autofac.Mvc5;
 using ServiceLite.Autofac.WebApi2;
 using ServiceLite.Core;
-using ServiceLite.Mvc;
+using ServiceLite.Mvc5;
 using ServiceLite.Swagger;
-using ServiceLite.WebApi;
+using ServiceLite.WebApi2;
 
 namespace DevdayDemo
 {

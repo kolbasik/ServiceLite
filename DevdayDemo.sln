@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Core", "Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Swagger", "ServiceLite.Swagger\ServiceLite.Swagger.csproj", "{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.WebApi", "ServiceLite.WebApi\ServiceLite.WebApi.csproj", "{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.WebApi2", "ServiceLite.WebApi2\ServiceLite.WebApi2.csproj", "{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Mvc", "ServiceLite.Mvc\ServiceLite.Mvc.csproj", "{40EB8633-A265-44B7-80AA-5815A6ABEA00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Mvc5", "ServiceLite.Mvc5\ServiceLite.Mvc5.csproj", "{40EB8633-A265-44B7-80AA-5815A6ABEA00}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Autofac.Core", "ServiceLite.Autofac.Core\ServiceLite.Autofac.Core.csproj", "{20C54719-17F6-4479-85BB-817BB6198585}"
 EndProject

@@ -494,17 +494,17 @@
       <Project>{6eac398a-1d86-4c9c-bc18-9427cafc0149}</Project>
       <Name>ServiceLite.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceLite.Mvc\ServiceLite.Mvc.csproj">
+    <ProjectReference Include="..\ServiceLite.Mvc5\ServiceLite.Mvc5.csproj">
       <Project>{40EB8633-A265-44B7-80AA-5815A6ABEA00}</Project>
-      <Name>ServiceLite.Mvc</Name>
+      <Name>ServiceLite.Mvc5</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceLite.Swagger\ServiceLite.Swagger.csproj">
       <Project>{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}</Project>
       <Name>ServiceLite.Swagger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceLite.WebApi\ServiceLite.WebApi.csproj">
+    <ProjectReference Include="..\ServiceLite.WebApi2\ServiceLite.WebApi2.csproj">
       <Project>{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}</Project>
-      <Name>ServiceLite.WebApi</Name>
+      <Name>ServiceLite.WebApi2</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
