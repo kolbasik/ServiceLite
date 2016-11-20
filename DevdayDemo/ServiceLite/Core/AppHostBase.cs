@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -11,57 +12,68 @@ namespace DevdayDemo.ServiceLite.Core
         public AppHostBase()
         {
             Properties = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            Plugins = new List<Plugin>();
+            Plugins = new List<IPlugin>();
             Instance = this;
         }
 
         public IDictionary<string, object> Properties { get; }
-        public List<Plugin> Plugins { get; }
+        public List<IPlugin> Plugins { get; }
         public IServiceProvider Container { get; private set; }
 
-        public virtual AppHostBase Use(IServiceCollection container)
+        public virtual AppHostBase Configure(IServiceCollection container)
         {
-            Configure(container);
-            ConfigurePlugins(container);
+            var context = new ConfigurationContext(this, container);
+            Execute<IPreConfigurable>(this, x => x.PreConfigure(context));
+            Execute<IPreConfigurable>(Plugins, x => x.PreConfigure(context));
+            Execute<IConfigurable>(this, x => x.Configure(context));
+            Execute<IConfigurable>(Plugins, x => x.Configure(context));
+            ConfigureServices(container);
             Container = container.Build();
+            Execute<IPostConfigurable>(Plugins, x => x.PostConfigure(context));
+            Execute<IPostConfigurable>(this, x => x.PostConfigure(context));
             return this;
         }
 
         public virtual AppHostBase Start()
         {
-            if (Container == null) throw new NotSupportedException("Please ensure that .Use(IServiceCollection container) method was called.");
-            RegisterPlugins();
+            if (Container == null)
+                throw new NotSupportedException("Please ensure that .Configure(IServiceCollection container) method was called.");
+            var context = new StartContext(this);
+            Execute<IPreStartable>(this, x => x.PreStart(context));
+            Execute<IPreStartable>(Plugins, x => x.PreStart(context));
+            Execute<IStartable>(this, x => x.Start(context));
+            Execute<IStartable>(Plugins, x => x.Start(context));
+            Execute<IPostStartable>(Plugins, x => x.PostStart(context));
+            Execute<IPostStartable>(this, x => x.PostStart(context));
             return this;
         }
 
-        protected virtual void Configure(IServiceCollection container)
+        protected virtual void ConfigureServices(IServiceCollection container)
         {
         }
 
-        protected virtual void ConfigurePlugins(IServiceCollection container)
+        protected virtual void Execute<T>(object self, Action<T> execute) where T : class
         {
-            foreach (var plugin in Plugins)
-                try
+            try
+            {
+                var many = self as IEnumerable;
+                if (many != null)
                 {
-                    plugin.Configure(this, container);
+                    foreach (var one in many)
+                        Execute(one, execute);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Trace.TraceError(ex.ToString());
+                    var desired = self as T;
+                    if (desired != null)
+                        execute(desired);
                 }
-        }
-
-        protected virtual void RegisterPlugins()
-        {
-            foreach (var plugin in Plugins)
-                try
-                {
-                    plugin.Register(this);
-                }
-                catch (Exception ex)
-                {
-                    Trace.TraceError(ex.ToString());
-                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+                throw new ApplicationException("Could not start AppHost.", ex);
+            }
         }
     }
 }

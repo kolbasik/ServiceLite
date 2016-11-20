@@ -11,20 +11,16 @@ namespace DevdayDemo
     {
         public ServicesHost()
         {
-            Plugins.Add(new WebApiFeature());
-            Plugins.Add(new AutofacWebApiFeature());
-            Plugins.Add(new MvcFeature());
             Plugins.Add(new AutofacMvcFeature());
+            Plugins.Add(new AutofacWebApiFeature());
+            Plugins.Add(new WebApiFeature());
+            Plugins.Add(new SwaggerFeature { ApiVersions = { { "v1", "Application V1" }, { "v2", "Application V2" } } });
+            Plugins.Add(new MvcFeature());
         }
 
-        public AppHostBase Use(IAppBuilder app)
-        {
-            this.Set(app);
-            this.Use(new AutofacServiceCollection());
-            return this;
-        }
+        public AppHostBase Run(IAppBuilder app) => this.Set(app).Configure(new AutofacServiceCollection()).Start();
 
-        protected override void Configure(IServiceCollection container)
+        protected override void ConfigureServices(IServiceCollection container)
         {
             container.AddSingleton<ILoggingService, LoggingService>();
             container.AddSingleton<ICacheService, CacheService>();

@@ -4,11 +4,10 @@ using System.Web.Http;
 using Autofac.Integration.WebApi;
 using DevdayDemo.ServiceLite.Autofac;
 using DevdayDemo.ServiceLite.Core;
-using Owin;
 
 namespace DevdayDemo.ServiceLite.Features
 {
-    public sealed class AutofacWebApiFeature : Plugin
+    public sealed class AutofacWebApiFeature : IPlugin, IConfigurable, IPostConfigurable
     {
         public AutofacWebApiFeature()
         {
@@ -17,26 +16,29 @@ namespace DevdayDemo.ServiceLite.Features
 
         public List<Assembly> Assemblies { get; }
 
-        public override void Configure(IAppHost appHost, IServiceCollection container)
+        public void Configure(ConfigurationContext context)
         {
-            var builder = ((AutofacServiceCollection)container).Builder;
+            var builder = ((AutofacServiceCollection)context.ServiceCollection).Builder;
             var assemblies = Assemblies.ToArray();
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(assemblies);
 
             // OPTIONAL: Register the Autofac filter provider.
-            builder.RegisterWebApiFilterProvider(appHost.Get<HttpConfiguration>());
+            builder.RegisterWebApiFilterProvider(context.AppHost.Get<HttpConfiguration>());
         }
 
-
-        public override void Register(IAppHost appHost)
+        public void PostConfigure(ConfigurationContext context)
         {
-            var container = ((AutofacServiceProvider)appHost.Container).Container;
-            var config = appHost.Get<HttpConfiguration>();
+            var container = ((AutofacServiceProvider)context.AppHost.Container).Container;
+            var config = context.AppHost.Get<HttpConfiguration>();
 
             // Set the dependency resolver to be Autofac.
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+        }
+
+        public void Start(StartContext context)
+        {
         }
     }
 }

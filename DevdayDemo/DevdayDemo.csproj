@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -88,6 +89,10 @@
     <Reference Include="Glimpse.Mvc5">
       <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
     </Reference>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -119,6 +124,10 @@
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.5.3\lib\net40\Swashbuckle.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -223,8 +232,10 @@
     </Compile>
     <Compile Include="ServiceLite\Core\IAppHost.cs" />
     <Compile Include="ServiceLite\Core\IAppHostExtensions.cs" />
+    <Compile Include="ServiceLite\Core\IConfigurable.cs" />
     <Compile Include="ServiceLite\Core\IServiceCollection.cs" />
-    <Compile Include="ServiceLite\Core\Plugin.cs" />
+    <Compile Include="ServiceLite\Core\IPlugin.cs" />
+    <Compile Include="ServiceLite\Core\IStartable.cs" />
     <Compile Include="ServiceLite\Features\AutofacMvcFeature.cs" />
     <Compile Include="ServiceLite\Features\AutofacWebApiFeature.cs" />
     <Compile Include="ServiceLite\Features\MvcFeature.cs" />
@@ -232,6 +243,7 @@
     <Compile Include="ServiceLite\Autofac\AutofacServiceCollection.cs" />
     <Compile Include="ServiceLite\Autofac\AutofacServiceProvider.cs" />
     <Compile Include="ServiceLite\Core\AppHostBase.cs" />
+    <Compile Include="ServiceLite\Features\SwaggerFeature.cs" />
     <Compile Include="ServiceLite\Features\WebApiFeature.cs" />
     <Compile Include="ServicesHost.cs" />
     <Compile Include="Services\BrowserConfig\BrowserConfigService.cs" />

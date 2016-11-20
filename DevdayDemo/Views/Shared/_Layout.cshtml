@@ -98,7 +98,7 @@
     @* msapplication-config - The location of the browser configuration file. This is not required if the
         browserconfig.xml file is at the root of the site. *@
     @* <meta name="msapplication-config" content="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml)"> *@
-    
+
 
     @* Custom Fonts - If you are using custom fonts. Consider using the Google Web Fonts Loader in async mode.
         See https://github.com/typekit/webfontloader. *@
@@ -176,6 +176,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span aria-hidden="true" class="fa fa-cogs"></span> Debug <span aria-hidden="true" class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="@Url.Content("~/swagger")"><span aria-hidden="true" class="fa fa-cube"></span> Swagger</a></li>
                                 <li><a href="/@ConfigurationManager.AppSettings["elmah.mvc.route"]"><span aria-hidden="true" class="fa fa-life-ring"></span> Elmah</a></li>
                                 <li><a href="/glimpse.axd"><span aria-hidden="true" class="fa fa-line-chart"></span> Glimpse</a></li>
                                 <li><a href="/trace.axd"><span aria-hidden="true" class="fa fa-heart"></span> Tracing</a></li>
@@ -183,6 +184,7 @@
                         </li>
                     }
                 </ul>
+
                 <form action="@Url.RouteUrl(HomeControllerRoute.GetSearch)" class="navbar-form navbar-right" method="get" role="search">
                     <div class="input-group">
                         <input aria-label="Search" class="form-control" maxlength="2048" name="query" placeholder="Search" title="Search" type="text">

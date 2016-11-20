@@ -7,9 +7,9 @@ using DevdayDemo.ServiceLite.Core;
 
 namespace DevdayDemo.ServiceLite.Features
 {
-    public sealed class MvcFeature : Plugin
+    public sealed class MvcFeature : IPlugin
     {
-        public override void Register(IAppHost appHost)
+        public void Start(StartContext context)
         {
             // Ensure that the X-AspNetMvc-Version HTTP header is not
             MvcHandler.DisableMvcResponseHeader = true;

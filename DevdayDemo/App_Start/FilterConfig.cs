@@ -81,6 +81,7 @@
                 });
         }
 
+#pragma warning disable 1584, 1711, 1572, 1581, 1580
         /// <summary>
         /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers. This
         /// creates a white-list from where various content in a web page can be loaded from. (See
@@ -94,6 +95,7 @@
         /// access to content from YouTube.com, then you can add the following attribute to the action:
         /// [CspFrameSrc(CustomSources = "*.youtube.com")].
         /// </summary>
+#pragma warning restore 1584, 1711, 1572, 1581, 1580
         private static void AddContentSecurityPolicyFilters(GlobalFilterCollection filters)
         {
             // Content-Security-Policy - Add the Content-Security-Policy HTTP header to enable Content-Security-Policy.

@@ -2,7 +2,7 @@ namespace DevdayDemo.ServiceLite.Core
 {
     public static class IAppHostExtensions
     {
-        public static IAppHost Set<T>(this IAppHost appHost, string key, T value)
+        public static TAppHost Set<TAppHost, TValue>(this TAppHost appHost, string key, TValue value) where TAppHost : IAppHost
         {
             appHost.Properties[key] = value;
             return appHost;
@@ -16,7 +16,10 @@ namespace DevdayDemo.ServiceLite.Core
             return defaultValue;
         }
 
-        public static IAppHost Set<T>(this IAppHost appHost, T value) => appHost.Set(typeof(T).FullName, value);
-        public static T Get<T>(this IAppHost appHost) => appHost.Get<T>(typeof(T).FullName);
+        public static TAppHost Set<TAppHost, TValue>(this TAppHost appHost, TValue value) where TAppHost : IAppHost
+            => appHost.Set(typeof(TValue).FullName, value);
+
+        public static T Get<T>(this IAppHost appHost)
+            => appHost.Get<T>(typeof(T).FullName);
     }
 }

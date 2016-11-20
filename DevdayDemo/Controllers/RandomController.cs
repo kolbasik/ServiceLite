@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Runtime;
 using System.Web.Http;
 using DevdayDemo.Services.Random;
+using JetBrains.Annotations;
 
 namespace DevdayDemo.Controllers
 {
-    [RoutePrefix("api/v1/random")]
+    [PublicAPI, RoutePrefix("api/v2/random")]
     public sealed class RandomController : ApiController
     {
         private readonly IRandomService randomService;
 
-        public RandomController(IRandomService randomService)
+        public RandomController([NotNull] IRandomService randomService)
         {
             if (randomService == null)
                 throw new ArgumentNullException(nameof(randomService));

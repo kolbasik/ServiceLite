@@ -1,5 +1,6 @@
 ﻿using DevdayDemo;
 using DevdayDemo.ServiceLite.Autofac;
+using DevdayDemo.ServiceLite.Core;
 using Microsoft.Owin;
 using Owin;
 
@@ -11,7 +12,7 @@ namespace DevdayDemo
     {
         public void Configuration(IAppBuilder app)
         {
-            new ServicesHost().Use(app).Start();
+            new ServicesHost().Run(app);
         }
     }
 }

@@ -7,7 +7,7 @@ using Owin;
 
 namespace DevdayDemo.ServiceLite.Features
 {
-    public sealed class WebApiFeature : Plugin
+    public sealed class WebApiFeature : IPlugin, IPreConfigurable, IPostStartable
     {
         public WebApiFeature()
         {
@@ -33,32 +33,32 @@ namespace DevdayDemo.ServiceLite.Features
         public DefaultValueHandling JsonDefaultValueHandling { get; set; }
         public ReferenceLoopHandling JsonReferenceLoopHandling { get; set; }
 
-        public override void Configure(IAppHost appHost, IServiceCollection container)
+        public void PreConfigure(ConfigurationContext context)
         {
             if (HttpConfiguration == null)
             {
                 HttpConfiguration = new HttpConfiguration(new HttpRouteCollection(HostingEnvironment.ApplicationVirtualPath));
             }
-            appHost.Set(HttpConfiguration);
+            context.AppHost.Set(HttpConfiguration);
         }
 
-        public override void Register(IAppHost appHost)
+        public void Start(StartContext context)
         {
-            var app = appHost.Get<IAppBuilder>();
-            var config = appHost.Get<HttpConfiguration>();
+            var config = context.AppHost.Get<HttpConfiguration>();
 
-            Configure(config);
-
-            app.UseWebApi(config);
-        }
-
-        private void Configure(HttpConfiguration config)
-        {
             config.MapHttpAttributeRoutes();
 
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy;
 
             ConfigureFormatters(config);
+        }
+
+        public void PostStart(StartContext context)
+        {
+            var app = context.AppHost.Get<IAppBuilder>();
+            var config = context.AppHost.Get<HttpConfiguration>();
+
+            app.UseWebApi(config);
         }
 
         private void ConfigureFormatters(HttpConfiguration config)

@@ -9,7 +9,7 @@ using Owin;
 
 namespace DevdayDemo.ServiceLite.Features
 {
-    public sealed class AutofacMvcFeature : Plugin
+    public sealed class AutofacMvcFeature : IPlugin, IConfigurable, IPostConfigurable
     {
         public AutofacMvcFeature()
         {
@@ -18,9 +18,9 @@ namespace DevdayDemo.ServiceLite.Features
 
         public List<Assembly> Assemblies { get; }
 
-        public override void Configure(IAppHost appHost, IServiceCollection container)
+        public void Configure(ConfigurationContext context)
         {
-            var builder = ((AutofacServiceCollection) container).Builder;
+            var builder = ((AutofacServiceCollection)context.ServiceCollection).Builder;
             var assemblies = Assemblies.ToArray();
 
             // Register Common MVC Types
@@ -37,14 +37,20 @@ namespace DevdayDemo.ServiceLite.Features
             builder.RegisterControllers(assemblies);
         }
 
-        public override void Register(IAppHost appHost)
+        public void PostConfigure(ConfigurationContext context)
         {
-            var container = ((AutofacServiceProvider) appHost.Container).Container;
+            var container = ((AutofacServiceProvider)context.AppHost.Container).Container;
 
             // Sets the ASP.NET MVC dependency resolver.
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
 
-            var app = appHost.Get<IAppBuilder>();
+        public void Start(StartContext context)
+        {
+            var container = ((AutofacServiceProvider) context.AppHost.Container).Container;
+
+            var app = context.AppHost.Get<IAppBuilder>();
+
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
         }
