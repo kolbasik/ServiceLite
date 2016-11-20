@@ -5,6 +5,7 @@ using DevdayDemo.Services.Random;
 using Owin;
 using ServiceLite.Core;
 using ServiceLite.Swagger;
+using ServiceLite.WebApi;
 
 namespace DevdayDemo
 {

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 using Owin;
 using ServiceLite.Core;
 
-namespace DevdayDemo.ServiceLite.Features
+namespace ServiceLite.WebApi
 {
     public sealed class WebApiFeature : IPlugin, IPreConfigurable, IPostStartable
     {

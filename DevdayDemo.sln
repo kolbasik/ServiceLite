@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Core", "Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Swagger", "ServiceLite.Swagger\ServiceLite.Swagger.csproj", "{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.WebApi", "ServiceLite.WebApi\ServiceLite.WebApi.csproj", "{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -236,7 +236,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLite\Autofac\AutofacServiceCollection.cs" />
     <Compile Include="ServiceLite\Autofac\AutofacServiceProvider.cs" />
-    <Compile Include="ServiceLite\Features\WebApiFeature.cs" />
     <Compile Include="ServicesHost.cs" />
     <Compile Include="Services\BrowserConfig\BrowserConfigService.cs" />
     <Compile Include="Services\BrowserConfig\IBrowserConfigService.cs" />
@@ -490,6 +489,10 @@
     <ProjectReference Include="..\ServiceLite.Swagger\ServiceLite.Swagger.csproj">
       <Project>{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}</Project>
       <Name>ServiceLite.Swagger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLite.WebApi\ServiceLite.WebApi.csproj">
+      <Project>{E7A759E6-751E-49DB-81F6-D15EE6E06AAC}</Project>
+      <Name>ServiceLite.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
