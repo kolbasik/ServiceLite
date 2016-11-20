@@ -2,7 +2,7 @@
 using Autofac;
 using ServiceLite.Core;
 
-namespace DevdayDemo.ServiceLite.Autofac
+namespace ServiceLite.Autofac.Core
 {
     public sealed class AutofacServiceCollection : IServiceCollection
     {

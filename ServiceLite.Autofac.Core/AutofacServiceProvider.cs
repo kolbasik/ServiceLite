@@ -1,7 +1,7 @@
 ﻿using System;
 using Autofac;
 
-namespace DevdayDemo.ServiceLite.Autofac
+namespace ServiceLite.Autofac.Core
 {
     public sealed class AutofacServiceProvider : IServiceProvider
     {

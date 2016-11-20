@@ -1,11 +1,11 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using DevdayDemo.ServiceLite.Autofac;
 using DevdayDemo.ServiceLite.Features;
 using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
 using Owin;
+using ServiceLite.Autofac.Core;
 using ServiceLite.Core;
 using ServiceLite.Mvc;
 using ServiceLite.Swagger;

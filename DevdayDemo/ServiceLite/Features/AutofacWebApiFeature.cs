@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Http;
 using Autofac.Integration.WebApi;
-using DevdayDemo.ServiceLite.Autofac;
+using ServiceLite.Autofac.Core;
 using ServiceLite.Core;
 
 namespace DevdayDemo.ServiceLite.Features

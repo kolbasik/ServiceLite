@@ -1,5 +1,4 @@
 ﻿using DevdayDemo;
-using DevdayDemo.ServiceLite.Autofac;
 using Microsoft.Owin;
 using Owin;
 
