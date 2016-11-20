@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DevdayDemo.ServiceLite.Core
+namespace ServiceLite.Core
 {
     public interface IAppHost
     {

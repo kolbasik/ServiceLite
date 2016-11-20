@@ -1,9 +1,9 @@
 using System.Web.Hosting;
 using System.Web.Http;
-using DevdayDemo.ServiceLite.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using ServiceLite.Core;
 
 namespace DevdayDemo.ServiceLite.Features
 {

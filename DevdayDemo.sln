@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevdayDemo", "DevdayDemo\DevdayDemo.csproj", "{7A488CA9-3279-4727-9980-A36E344CCA13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Core", "ServiceLite.Core\ServiceLite.Core.csproj", "{6EAC398A-1D86-4C9C-BC18-9427CAFC0149}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7A488CA9-3279-4727-9980-A36E344CCA13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A488CA9-3279-4727-9980-A36E344CCA13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A488CA9-3279-4727-9980-A36E344CCA13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EAC398A-1D86-4C9C-BC18-9427CAFC0149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EAC398A-1D86-4C9C-BC18-9427CAFC0149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EAC398A-1D86-4C9C-BC18-9427CAFC0149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EAC398A-1D86-4C9C-BC18-9427CAFC0149}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

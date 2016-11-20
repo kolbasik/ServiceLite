@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using DevdayDemo.ServiceLite.Core;
+using ServiceLite.Core;
 
 namespace DevdayDemo.ServiceLite.Autofac
 {

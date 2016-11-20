@@ -1,7 +1,7 @@
 using System;
 using JetBrains.Annotations;
 
-namespace DevdayDemo.ServiceLite.Core
+namespace ServiceLite.Core
 {
     public interface IConfigurable
     {

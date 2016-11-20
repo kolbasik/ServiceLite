@@ -1,6 +1,6 @@
 using System;
 
-namespace DevdayDemo.ServiceLite.Core
+namespace ServiceLite.Core
 {
     public interface IServiceCollection
     {

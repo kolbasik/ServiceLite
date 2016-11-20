@@ -4,8 +4,8 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using DevdayDemo.ServiceLite.Autofac;
-using DevdayDemo.ServiceLite.Core;
 using Owin;
+using ServiceLite.Core;
 
 namespace DevdayDemo.ServiceLite.Features
 {

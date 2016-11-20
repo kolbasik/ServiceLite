@@ -1,4 +1,4 @@
-namespace DevdayDemo.ServiceLite.Core
+namespace ServiceLite.Core
 {
     public static class IAppHostExtensions
     {

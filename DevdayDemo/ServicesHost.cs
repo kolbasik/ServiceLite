@@ -1,9 +1,9 @@
 ﻿using DevdayDemo.ServiceLite.Autofac;
-using DevdayDemo.ServiceLite.Core;
 using DevdayDemo.ServiceLite.Features;
 using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
 using Owin;
+using ServiceLite.Core;
 
 namespace DevdayDemo
 {
