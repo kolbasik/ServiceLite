@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Http;
-using Autofac;
 using Autofac.Integration.WebApi;
 using ServiceLite.Autofac.Core;
 using ServiceLite.Core;
 
-namespace DevdayDemo.ServiceLite.Features
+namespace ServiceLite.Autofac.WebApi2
 {
     public sealed class AutofacWebApiFeature : IPlugin, IConfigurable, IPostConfigurable
     {
         public AutofacWebApiFeature()
         {
-            Assemblies = new List<Assembly> { Assembly.GetExecutingAssembly() };
+            Assemblies = new List<Assembly> { Assembly.GetCallingAssembly() };
         }
 
         public List<Assembly> Assemblies { get; }

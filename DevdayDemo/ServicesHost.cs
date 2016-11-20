@@ -1,12 +1,12 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using DevdayDemo.ServiceLite.Features;
 using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
 using Owin;
 using ServiceLite.Autofac.Core;
 using ServiceLite.Autofac.Mvc5;
+using ServiceLite.Autofac.WebApi2;
 using ServiceLite.Core;
 using ServiceLite.Mvc;
 using ServiceLite.Swagger;
@@ -18,10 +18,10 @@ namespace DevdayDemo
     {
         public ServicesHost()
         {
-            Plugins.Add(new AutofacMvcFeature());
             Plugins.Add(new AutofacWebApiFeature());
             Plugins.Add(new WebApiFeature());
             Plugins.Add(new SwaggerFeature { ApiVersions = { { "v1", "Application V1" }, { "v2", "Application V2" } } });
+            Plugins.Add(new AutofacMvcFeature());
             Plugins.Add(new MvcFeature { RegisterRoutesEnabled = false });
             Plugins.Add(new CustomFeature());
         }
