@@ -43,6 +43,7 @@
     <!-- Build the .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
          We do this only in release mode because this stops edit and refresh from working. -->
     <MvcBuildViews>true</MvcBuildViews>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
