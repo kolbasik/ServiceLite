@@ -7,7 +7,7 @@ using ServiceLite.Core;
 using Swashbuckle.Application;
 using Swashbuckle.Swagger;
 
-namespace DevdayDemo.ServiceLite.Features
+namespace ServiceLite.Swagger
 {
     /// <summary>
     ///     https://github.com/domaindrivendev/Swashbuckle
