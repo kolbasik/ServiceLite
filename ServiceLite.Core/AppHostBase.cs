@@ -69,6 +69,10 @@ namespace ServiceLite.Core
                         execute(desired);
                 }
             }
+            catch (ApplicationException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 Trace.TraceError(ex.ToString());

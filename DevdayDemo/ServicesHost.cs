@@ -1,9 +1,13 @@
-﻿using DevdayDemo.ServiceLite.Autofac;
+﻿using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
+using DevdayDemo.ServiceLite.Autofac;
 using DevdayDemo.ServiceLite.Features;
 using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
 using Owin;
 using ServiceLite.Core;
+using ServiceLite.Mvc;
 using ServiceLite.Swagger;
 using ServiceLite.WebApi;
 
@@ -17,7 +21,8 @@ namespace DevdayDemo
             Plugins.Add(new AutofacWebApiFeature());
             Plugins.Add(new WebApiFeature());
             Plugins.Add(new SwaggerFeature { ApiVersions = { { "v1", "Application V1" }, { "v2", "Application V2" } } });
-            Plugins.Add(new MvcFeature());
+            Plugins.Add(new MvcFeature { RegisterRoutesEnabled = false });
+            Plugins.Add(new CustomFeature());
         }
 
         public AppHostBase Run(IAppBuilder app) => this.Set(app).Configure(new AutofacServiceCollection()).Start();
@@ -34,6 +39,16 @@ namespace DevdayDemo
             container.AddScoped<ISitemapService, SitemapService>();
             container.AddScoped<ISitemapPingerService, SitemapPingerService>();
             container.AddScoped<IRandomService, RandomService>();
+        }
+
+        private sealed class CustomFeature : IPlugin
+        {
+            public void Start(StartContext context)
+            {
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+                BundleConfig.RegisterBundles(BundleTable.Bundles);
+                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            }
         }
     }
 }
