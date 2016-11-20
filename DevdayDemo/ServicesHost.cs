@@ -6,6 +6,7 @@ using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
 using Owin;
 using ServiceLite.Autofac.Core;
+using ServiceLite.Autofac.Mvc5;
 using ServiceLite.Core;
 using ServiceLite.Mvc;
 using ServiceLite.Swagger;

@@ -7,13 +7,13 @@ using Owin;
 using ServiceLite.Autofac.Core;
 using ServiceLite.Core;
 
-namespace DevdayDemo.ServiceLite.Features
+namespace ServiceLite.Autofac.Mvc5
 {
     public sealed class AutofacMvcFeature : IPlugin, IConfigurable, IPostConfigurable
     {
         public AutofacMvcFeature()
         {
-            Assemblies = new List<Assembly> { Assembly.GetExecutingAssembly() };
+            Assemblies = new List<Assembly> { Assembly.GetCallingAssembly() };
         }
 
         public List<Assembly> Assemblies { get; }

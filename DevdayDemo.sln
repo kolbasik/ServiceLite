@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Mvc", "ServiceL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Autofac.Core", "ServiceLite.Autofac.Core\ServiceLite.Autofac.Core.csproj", "{20C54719-17F6-4479-85BB-817BB6198585}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.Autofac.Mvc5", "ServiceLite.Autofac.Mvc5\ServiceLite.Autofac.Mvc5.csproj", "{232AF52D-1533-4FF5-8A02-6AF8F17377E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{20C54719-17F6-4479-85BB-817BB6198585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20C54719-17F6-4479-85BB-817BB6198585}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20C54719-17F6-4479-85BB-817BB6198585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{232AF52D-1533-4FF5-8A02-6AF8F17377E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{232AF52D-1533-4FF5-8A02-6AF8F17377E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{232AF52D-1533-4FF5-8A02-6AF8F17377E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{232AF52D-1533-4FF5-8A02-6AF8F17377E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

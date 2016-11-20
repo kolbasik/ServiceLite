@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Http;
+using Autofac;
 using Autofac.Integration.WebApi;
 using ServiceLite.Autofac.Core;
 using ServiceLite.Core;
