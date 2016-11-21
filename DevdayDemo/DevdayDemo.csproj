@@ -107,6 +107,18 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NWebsec, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
       <HintPath>..\packages\NWebsec.4.2.0\lib\45\NWebsec.dll</HintPath>
       <Private>True</Private>
@@ -497,6 +509,14 @@
     <ProjectReference Include="..\ServiceLite.Mvc5\ServiceLite.Mvc5.csproj">
       <Project>{40EB8633-A265-44B7-80AA-5815A6ABEA00}</Project>
       <Name>ServiceLite.Mvc5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLite.NInject.Core\ServiceLite.NInject.Core.csproj">
+      <Project>{40153026-417A-4F18-8725-B7152F4854F6}</Project>
+      <Name>ServiceLite.NInject.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLite.NInject.Mvc5\ServiceLite.NInject.Mvc5.csproj">
+      <Project>{952211EF-D9F2-4EE4-91F4-5BA2737A97A5}</Project>
+      <Name>ServiceLite.NInject.Mvc5</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceLite.Swagger\ServiceLite.Swagger.csproj">
       <Project>{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}</Project>

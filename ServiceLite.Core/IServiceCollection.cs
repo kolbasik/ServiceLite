@@ -10,7 +10,7 @@ namespace ServiceLite.Core
         void AddScoped<TService>(Func<IServiceProvider, TService> factory);
         void AddSingleton<TContract, TService>() where TService : TContract;
         void AddSingleton<TService>(Func<IServiceProvider, TService> factory);
-        void AddSingleton<TService>(TService target);
+        void AddSingleton<TService>(TService service);
         IServiceProvider Build();
     }
 }

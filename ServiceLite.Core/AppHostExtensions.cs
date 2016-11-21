@@ -34,7 +34,7 @@ namespace ServiceLite.Core
             var value = appHost.GetOptional<T>();
             if (object.Equals(value, default(T)))
             {
-                throw new ArgumentNullException(typeof(T).FullName, $@"Could not find the value of '{typeof(T).FullName}' type.");
+                throw new InvalidOperationException($@"Could not find the value of '{typeof(T).FullName}' type.");
             }
             return value;
         }

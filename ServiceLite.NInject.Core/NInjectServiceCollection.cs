@@ -1,63 +1,73 @@
 ﻿using System;
 using System.Diagnostics;
-using Autofac;
+using Ninject;
+using Ninject.Activation;
+using Ninject.Modules;
 using ServiceLite.Core;
 
-namespace ServiceLite.Autofac.Core
+namespace ServiceLite.NInject.Core
 {
-    public sealed class AutofacServiceCollection : IServiceCollection
+    public sealed class NInjectServiceCollection : IServiceCollection
     {
-        public readonly ContainerBuilder Builder;
+        public readonly IKernel Kernel;
 
-        public AutofacServiceCollection()
+        public NInjectServiceCollection(IKernel kernel)
         {
-            Builder = new ContainerBuilder();
-            AddSingleton<IServiceProvider, AutofacServiceProvider>();
+            if (kernel == null)
+                throw new ArgumentNullException(nameof(kernel));
+            Kernel = kernel;
         }
+
+        public NInjectServiceCollection(params INinjectModule[] modules)
+        {
+            Kernel = new StandardKernel(modules);
+        }
+
+        public Func<IContext, object> InRequestScope { get; set; } = context => null;
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public void AddTransient<TContract, TService>() where TService : TContract
         {
-            Builder.RegisterType<TService>().As<TContract>().InstancePerDependency();
+            Kernel.Bind<TContract>().To<TService>().InTransientScope();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public void AddTransient<TService>(Func<IServiceProvider, TService> factory)
         {
-            Builder.Register<TService>(context => factory(context.Resolve<IServiceProvider>())).InstancePerDependency();
+            Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InTransientScope();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public void AddScoped<TContract, TService>() where TService : TContract
         {
-            Builder.RegisterType<TService>().As<TContract>().InstancePerRequest();
+            Kernel.Bind<TContract>().To<TService>().InScope(InRequestScope);
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public void AddScoped<TService>(Func<IServiceProvider, TService> factory)
         {
-            Builder.Register<TService>(context => factory(context.Resolve<IServiceProvider>())).InstancePerRequest();
+            Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InScope(InRequestScope);
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public void AddSingleton<TContract, TService>() where TService : TContract
         {
-            Builder.RegisterType<TService>().As<TContract>().SingleInstance();
+            Kernel.Bind<TContract>().To<TService>().InSingletonScope();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public void AddSingleton<TService>(Func<IServiceProvider, TService> factory)
         {
-            Builder.Register<TService>(context => factory(context.Resolve<IServiceProvider>())).SingleInstance();
+            Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InSingletonScope();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public void AddSingleton<TService>(TService service)
         {
-            Builder.Register<TService>(context => service).SingleInstance();
+            Kernel.Bind<TService>().ToConstant(service);
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
-        public IServiceProvider Build() => Builder.Build().Resolve<IServiceProvider>();
+        public IServiceProvider Build() => Kernel;
     }
 }

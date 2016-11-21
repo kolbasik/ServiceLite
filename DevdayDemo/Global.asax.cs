@@ -1,4 +1,4 @@
-﻿using System.Web.Http;
+﻿using Ninject.Web.Common;
 
 namespace DevdayDemo
 {
@@ -7,8 +7,15 @@ namespace DevdayDemo
     using DevdayDemo.Services;
     using NWebsec.Csp;
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class Global : System.Web.HttpApplication
     {
+        public override void Init()
+        {
+            base.Init();
+            new OnePerRequestHttpModule().Init(this);
+
+        }
+
         /// <summary>
         /// Handles the Content Security Policy (CSP) violation errors. For more information see FilterConfig.
         /// </summary>
