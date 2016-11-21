@@ -38,7 +38,7 @@ namespace ServiceLite.Autofac.Mvc5
 
         public void PostConfigure(ConfigurationContext context)
         {
-            var container = context.AppHost.Get<IContainer>();
+            var container = context.AppHost.Get<ILifetimeScope>();
 
             // Sets the ASP.NET MVC dependency resolver.
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
@@ -46,7 +46,7 @@ namespace ServiceLite.Autofac.Mvc5
 
         public void Start(StartContext context)
         {
-            var container = context.AppHost.Get<IContainer>();
+            var container = context.AppHost.Get<ILifetimeScope>();
 
             var app = context.AppHost.Get<IAppBuilder>();
 

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using JetBrains.Annotations;
 
 namespace DevdayDemo.Services.Random
 {
+    [PublicAPI]
     public sealed class RandomService : IRandomService
     {
         private System.Random random;

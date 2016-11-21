@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using DevdayDemo.Services;
@@ -14,9 +15,9 @@ using ServiceLite.WebApi2;
 
 namespace DevdayDemo
 {
-    public sealed class ServicesHost : AppHostBase
+    internal sealed class AppHost : AppHostBase
     {
-        public ServicesHost()
+        public AppHost()
         {
             Plugins.Add(new AutofacFeature());
             Plugins.Add(new AutofacWebApiFeature());
@@ -29,18 +30,18 @@ namespace DevdayDemo
 
         public AppHostBase Run(IAppBuilder app) => this.Set(app).Configure(new AutofacServiceCollection()).Start();
 
-        protected override void ConfigureServices(IServiceCollection container)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            container.AddSingleton<ILoggingService, LoggingService>();
-            container.AddSingleton<ICacheService, CacheService>();
-            container.AddScoped<IBrowserConfigService, BrowserConfigService>();
-            container.AddScoped<IFeedService, FeedService>();
-            container.AddScoped<IManifestService, ManifestService>();
-            container.AddScoped<IOpenSearchService, OpenSearchService>();
-            container.AddScoped<IRobotsService, RobotsService>();
-            container.AddScoped<ISitemapService, SitemapService>();
-            container.AddScoped<ISitemapPingerService, SitemapPingerService>();
-            container.AddScoped<IRandomService, RandomService>();
+            services.AddSingleton<ILoggingService, LoggingService>();
+            services.AddSingleton<ICacheService, CacheService>();
+            services.AddScoped<IBrowserConfigService, BrowserConfigService>();
+            services.AddScoped<IFeedService, FeedService>();
+            services.AddScoped<IManifestService, ManifestService>();
+            services.AddScoped<IOpenSearchService, OpenSearchService>();
+            services.AddScoped<IRobotsService, RobotsService>();
+            services.AddScoped<ISitemapService, SitemapService>();
+            services.AddScoped<ISitemapPingerService, SitemapPingerService>();
+            services.AddScoped<IRandomService, RandomService>();
         }
 
         private sealed class CustomFeature : IPlugin

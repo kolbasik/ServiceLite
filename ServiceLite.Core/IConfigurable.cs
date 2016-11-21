@@ -20,17 +20,17 @@ namespace ServiceLite.Core
 
     public sealed class ConfigurationContext
     {
-        public ConfigurationContext([NotNull] IAppHost appHost, [NotNull] IServiceCollection serviceCollection)
+        public ConfigurationContext([NotNull] IAppHost appHost, [NotNull] IServiceCollection services)
         {
             if (appHost == null)
                 throw new ArgumentNullException(nameof(appHost));
-            if (serviceCollection == null)
-                throw new ArgumentNullException(nameof(serviceCollection));
+            if (services == null)
+                throw new ArgumentNullException(nameof(services));
             AppHost = appHost;
-            ServiceCollection = serviceCollection;
+            Services = services;
         }
 
         public IAppHost AppHost { get; }
-        public IServiceCollection ServiceCollection { get; }
+        public IServiceCollection Services { get; }
     }
 }

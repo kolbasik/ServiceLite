@@ -1,4 +1,5 @@
 ﻿using DevdayDemo;
+using JetBrains.Annotations;
 using Microsoft.Owin;
 using Owin;
 
@@ -6,11 +7,9 @@ using Owin;
 
 namespace DevdayDemo
 {
+    [PublicAPI]
     public sealed class Startup
     {
-        public void Configuration(IAppBuilder app)
-        {
-            new ServicesHost().Run(app);
-        }
+        public void Configuration(IAppBuilder app) => new AppHost().Run(app);
     }
 }

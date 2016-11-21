@@ -7,9 +7,9 @@ namespace ServiceLite.Autofac.Core
 {
     public sealed class AutofacServiceProvider : IServiceProvider
     {
-        public readonly IContainer Container;
+        public readonly ILifetimeScope Container;
 
-        public AutofacServiceProvider([NotNull] IContainer container)
+        public AutofacServiceProvider([NotNull] ILifetimeScope container)
         {
             if (container == null)
                 throw new ArgumentNullException(nameof(container));

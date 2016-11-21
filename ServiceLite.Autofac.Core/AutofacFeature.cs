@@ -7,16 +7,16 @@ namespace ServiceLite.Autofac.Core
     {
         public void PreConfigure(ConfigurationContext context)
         {
-            var builder = ((AutofacServiceCollection)context.ServiceCollection).Builder;
+            var builder = ((AutofacServiceCollection)context.Services).Builder;
 
-            context.AppHost.Set<IAppHost, ContainerBuilder>(builder);
+            context.AppHost.Set(builder);
         }
 
         public void PostConfigure(ConfigurationContext context)
         {
             var container = ((AutofacServiceProvider)context.AppHost.Container).Container;
 
-            context.AppHost.Set<IAppHost, IContainer>(container);
+            context.AppHost.Set(container);
         }
 
         public void Start(StartContext context)

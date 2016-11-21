@@ -30,7 +30,7 @@ namespace ServiceLite.Autofac.WebApi2
 
         public void PostConfigure(ConfigurationContext context)
         {
-            var container = context.AppHost.Get<IContainer>();
+            var container = context.AppHost.Get<ILifetimeScope>();
             var config = context.AppHost.Get<HttpConfiguration>();
 
             // Set the dependency resolver to be Autofac.

@@ -51,7 +51,7 @@ namespace ServiceLite.Core
             return this;
         }
 
-        protected virtual void ConfigureServices(IServiceCollection container)
+        protected virtual void ConfigureServices(IServiceCollection services)
         {
         }
 
