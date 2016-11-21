@@ -18,14 +18,14 @@ namespace ServiceLite.Autofac.WebApi2
 
         public void Configure(ConfigurationContext context)
         {
-            var builder = context.AppHost.Get<ContainerBuilder>();
+            var containerBuilder = context.AppHost.Get<ContainerBuilder>();
             var assemblies = Assemblies.ToArray();
 
             // Register your Web API controllers.
-            builder.RegisterApiControllers(assemblies);
+            containerBuilder.RegisterApiControllers(assemblies);
 
             // OPTIONAL: Register the Autofac filter provider.
-            builder.RegisterWebApiFilterProvider(context.AppHost.Get<HttpConfiguration>());
+            containerBuilder.RegisterWebApiFilterProvider(context.AppHost.Get<HttpConfiguration>());
         }
 
         public void PostConfigure(ConfigurationContext context)

@@ -19,21 +19,21 @@ namespace ServiceLite.Autofac.Mvc5
 
         public void Configure(ConfigurationContext context)
         {
-            var builder = context.AppHost.Get<ContainerBuilder>();
+            var containerBuilder = context.AppHost.Get<ContainerBuilder>();
             var assemblies = Assemblies.ToArray();
 
             // Register Common MVC Types
-            builder.RegisterModule<AutofacWebTypesModule>();
+            containerBuilder.RegisterModule<AutofacWebTypesModule>();
 
             // Register MVC Filters
-            builder.RegisterFilterProvider();
+            containerBuilder.RegisterFilterProvider();
 
             // Register MVC ModelBindes
-            builder.RegisterModelBinderProvider();
-            builder.RegisterModelBinders(assemblies);
+            containerBuilder.RegisterModelBinderProvider();
+            containerBuilder.RegisterModelBinders(assemblies);
 
             // Register MVC Controllers
-            builder.RegisterControllers(assemblies);
+            containerBuilder.RegisterControllers(assemblies);
         }
 
         public void PostConfigure(ConfigurationContext context)

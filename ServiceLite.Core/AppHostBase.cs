@@ -9,6 +9,7 @@ namespace ServiceLite.Core
     {
         public static AppHostBase Instance;
 
+        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public AppHostBase()
         {
             Properties = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
@@ -20,6 +21,7 @@ namespace ServiceLite.Core
         public List<IPlugin> Plugins { get; }
         public IServiceProvider Container { get; private set; }
 
+        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public virtual AppHostBase Configure(IServiceCollection container)
         {
             var context = new ConfigurationContext(this, container);
@@ -34,6 +36,7 @@ namespace ServiceLite.Core
             return this;
         }
 
+        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public virtual AppHostBase Start()
         {
             if (Container == null)
@@ -52,6 +55,7 @@ namespace ServiceLite.Core
         {
         }
 
+        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         protected virtual void Execute<T>(object self, Action<T> execute) where T : class
         {
             try
