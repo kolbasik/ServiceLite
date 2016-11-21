@@ -15,7 +15,7 @@ using ServiceLite.WebApi2;
 
 namespace DevdayDemo
 {
-    internal sealed class AppHost : AppHostBase
+    internal sealed class AppHost : AppHostBase, IStartable
     {
         public AppHost()
         {
@@ -25,7 +25,6 @@ namespace DevdayDemo
             Plugins.Add(new SwaggerFeature { ApiVersions = { { "v1", "Application V1" }, { "v2", "Application V2" } } });
             Plugins.Add(new AutofacMvcFeature());
             Plugins.Add(new MvcFeature { RegisterRoutesEnabled = false });
-            Plugins.Add(new CustomFeature());
         }
 
         public AppHostBase Run(IAppBuilder app) => this.Set(app).Configure(new AutofacServiceCollection()).Start();
@@ -44,14 +43,11 @@ namespace DevdayDemo
             services.AddScoped<IRandomService, RandomService>();
         }
 
-        private sealed class CustomFeature : IPlugin
+        public void Start(StartContext context)
         {
-            public void Start(StartContext context)
-            {
-                RouteConfig.RegisterRoutes(RouteTable.Routes);
-                BundleConfig.RegisterBundles(BundleTable.Bundles);
-                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            }
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
     }
 }
