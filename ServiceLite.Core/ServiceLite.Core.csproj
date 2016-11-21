@@ -48,10 +48,11 @@
   <ItemGroup>
     <Compile Include="AppHostBase.cs" />
     <Compile Include="IAppHost.cs" />
-    <Compile Include="IAppHostExtensions.cs" />
+    <Compile Include="AppHostExtensions.cs" />
     <Compile Include="IConfigurable.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IServiceCollection.cs" />
+    <Compile Include="ServiceProviderExtensions.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

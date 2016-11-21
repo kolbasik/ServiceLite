@@ -4,13 +4,13 @@ namespace ServiceLite.Core
 {
     public interface IServiceCollection
     {
-        void AddTransient<TSource, TTarget>() where TTarget : TSource;
-        void AddTransient<TSource>(Func<IServiceProvider, TSource> factory);
-        void AddScoped<TSource, TTarget>() where TTarget : TSource;
-        void AddScoped<TSource>(Func<IServiceProvider, TSource> factory);
-        void AddSingleton<TSource, TTarget>() where TTarget : TSource;
-        void AddSingleton<TSource>(Func<IServiceProvider, TSource> factory);
-        void AddInstance<TTarget>(TTarget target) where TTarget : class;
+        void AddTransient<TContract, TService>() where TService : TContract;
+        void AddTransient<TService>(Func<IServiceProvider, TService> factory);
+        void AddScoped<TContract, TService>() where TService : TContract;
+        void AddScoped<TService>(Func<IServiceProvider, TService> factory);
+        void AddSingleton<TContract, TService>() where TService : TContract;
+        void AddSingleton<TService>(Func<IServiceProvider, TService> factory);
+        void AddSingleton<TService>(TService target);
         IServiceProvider Build();
     }
 }

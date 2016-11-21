@@ -22,39 +22,39 @@ namespace ServiceLite.Autofac.Core
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
-        public void AddTransient<TSource>(Func<IServiceProvider, TSource> factory)
+        public void AddTransient<TService>(Func<IServiceProvider, TService> factory)
         {
-            Builder.Register<TSource>(context => factory(context.Resolve<IServiceProvider>())).InstancePerDependency();
+            Builder.Register<TService>(context => factory(context.Resolve<IServiceProvider>())).InstancePerDependency();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
-        public void AddScoped<TSource, TTarget>() where TTarget : TSource
+        public void AddScoped<TContract, TService>() where TService : TContract
         {
-            Builder.RegisterType<TTarget>().As<TSource>().InstancePerRequest();
+            Builder.RegisterType<TService>().As<TContract>().InstancePerRequest();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
-        public void AddScoped<TSource>(Func<IServiceProvider, TSource> factory)
+        public void AddScoped<TService>(Func<IServiceProvider, TService> factory)
         {
-            Builder.Register<TSource>(context => factory(context.Resolve<IServiceProvider>())).InstancePerRequest();
+            Builder.Register<TService>(context => factory(context.Resolve<IServiceProvider>())).InstancePerRequest();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
-        public void AddSingleton<TSource, TTarget>() where TTarget : TSource
+        public void AddSingleton<TContract, TService>() where TService : TContract
         {
-            Builder.RegisterType<TTarget>().As<TSource>().SingleInstance();
+            Builder.RegisterType<TService>().As<TContract>().SingleInstance();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
-        public void AddSingleton<TSource>(Func<IServiceProvider, TSource> factory)
+        public void AddSingleton<TService>(Func<IServiceProvider, TService> factory)
         {
-            Builder.Register<TSource>(context => factory(context.Resolve<IServiceProvider>())).SingleInstance();
+            Builder.Register<TService>(context => factory(context.Resolve<IServiceProvider>())).SingleInstance();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
-        public void AddInstance<TTarget>(TTarget target) where TTarget : class
+        public void AddSingleton<TService>(TService target)
         {
-            Builder.RegisterInstance(target);
+            Builder.Register<TService>(context => target).SingleInstance();
         }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]

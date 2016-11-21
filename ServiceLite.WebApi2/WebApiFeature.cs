@@ -44,7 +44,7 @@ namespace ServiceLite.WebApi2
 
         public void Start(StartContext context)
         {
-            var config = context.AppHost.Get<HttpConfiguration>();
+            var config = context.AppHost.GetRequired<HttpConfiguration>();
 
             config.MapHttpAttributeRoutes();
 
@@ -55,8 +55,8 @@ namespace ServiceLite.WebApi2
 
         public void PostStart(StartContext context)
         {
-            var app = context.AppHost.Get<IAppBuilder>();
-            var config = context.AppHost.Get<HttpConfiguration>();
+            var app = context.AppHost.GetRequired<IAppBuilder>();
+            var config = context.AppHost.GetRequired<HttpConfiguration>();
 
             app.UseWebApi(config);
         }

@@ -40,7 +40,7 @@ namespace DevdayDemo
             services.AddScoped<IRobotsService, RobotsService>();
             services.AddScoped<ISitemapService, SitemapService>();
             services.AddScoped<ISitemapPingerService, SitemapPingerService>();
-            services.AddScoped<IRandomService, RandomService>();
+            services.AddSingleton<IRandomService>(new RandomService());
         }
 
         public void Start(StartContext context)

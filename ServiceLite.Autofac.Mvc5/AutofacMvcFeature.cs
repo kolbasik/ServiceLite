@@ -19,7 +19,7 @@ namespace ServiceLite.Autofac.Mvc5
 
         public void Configure(ConfigurationContext context)
         {
-            var containerBuilder = context.AppHost.Get<ContainerBuilder>();
+            var containerBuilder = context.AppHost.GetRequired<ContainerBuilder>();
             var assemblies = Assemblies.ToArray();
 
             // Register Common MVC Types
@@ -38,7 +38,7 @@ namespace ServiceLite.Autofac.Mvc5
 
         public void PostConfigure(ConfigurationContext context)
         {
-            var container = context.AppHost.Get<ILifetimeScope>();
+            var container = context.AppHost.GetRequired<ILifetimeScope>();
 
             // Sets the ASP.NET MVC dependency resolver.
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
@@ -46,9 +46,9 @@ namespace ServiceLite.Autofac.Mvc5
 
         public void Start(StartContext context)
         {
-            var container = context.AppHost.Get<ILifetimeScope>();
+            var container = context.AppHost.GetRequired<ILifetimeScope>();
 
-            var app = context.AppHost.Get<IAppBuilder>();
+            var app = context.AppHost.GetRequired<IAppBuilder>();
 
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();

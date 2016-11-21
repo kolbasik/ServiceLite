@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace ServiceLite.Core
 {
-    public static class IAppHostExtensions
+    public static class AppHostExtensions
     {
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public static TAppHost Set<TAppHost, TValue>(this TAppHost appHost, string key, TValue value) where TAppHost : IAppHost
@@ -26,13 +26,15 @@ namespace ServiceLite.Core
             => appHost.Set(typeof(TValue).FullName, value);
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
-        public static T Get<T>(this IAppHost appHost)
+        public static T GetOptional<T>(this IAppHost appHost) => appHost.Get<T>(typeof(T).FullName);
+
+        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        public static T GetRequired<T>(this IAppHost appHost)
         {
-            var valueName = typeof(T).FullName;
-            var value = appHost.Get<T>(valueName);
+            var value = appHost.GetOptional<T>();
             if (object.Equals(value, default(T)))
             {
-                throw new ArgumentNullException(valueName, "Could not find the value.");
+                throw new ArgumentNullException(typeof(T).FullName, $@"Could not find the value of '{typeof(T).FullName}' type.");
             }
             return value;
         }

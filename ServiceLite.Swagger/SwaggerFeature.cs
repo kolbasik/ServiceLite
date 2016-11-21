@@ -39,7 +39,7 @@ namespace ServiceLite.Swagger
 
         public void Start(StartContext context)
         {
-            var config = context.AppHost.Get<HttpConfiguration>();
+            var config = context.AppHost.GetRequired<HttpConfiguration>();
 
             var swagger = config.EnableSwagger(
                 c =>
