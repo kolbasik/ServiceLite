@@ -494,6 +494,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceLite.AspNet\ServiceLite.AspNet.csproj">
+      <Project>{B7D425D6-52DF-4C06-B6F0-1BB161A177DF}</Project>
+      <Name>ServiceLite.AspNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLite.Autofac.Core\ServiceLite.Autofac.Core.csproj">
       <Project>{20C54719-17F6-4479-85BB-817BB6198585}</Project>
       <Name>ServiceLite.Autofac.Core</Name>

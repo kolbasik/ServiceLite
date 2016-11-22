@@ -91,8 +91,18 @@ namespace ServiceLite.Core
 
         public static void Release()
         {
-            Release(Instance);
-            Instance = null;
+            var instance = Instance;
+            if (instance != null)
+            {
+                lock (instance)
+                {
+                    if (ReferenceEquals(instance, Instance))
+                    {
+                        Release(instance);
+                        Instance = null;
+                    }
+                }
+            }
         }
 
         public static void Release(AppHostBase appHost)

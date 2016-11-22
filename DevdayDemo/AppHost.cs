@@ -5,6 +5,7 @@ using System.Web.Routing;
 using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
 using Owin;
+using ServiceLite.AspNet;
 using ServiceLite.Autofac.Core;
 using ServiceLite.Autofac.Mvc5;
 using ServiceLite.Autofac.WebApi2;
@@ -30,6 +31,7 @@ namespace DevdayDemo
 
         public AppHost()
         {
+            Plugins.Add(new AspNetFeature { RegisterSystemWeb = ContainerType != DiType.Autofac });
             switch (ContainerType)
             {
                 case DiType.Autofac:
@@ -49,7 +51,7 @@ namespace DevdayDemo
             }
             Plugins.Add(new WebApiFeature());
             Plugins.Add(new SwaggerFeature { ApiVersions = { { "v1", "Application V1" }, { "v2", "Application V2" } } });
-            Plugins.Add(new MvcFeature { RegisterRoutesEnabled = false });
+            Plugins.Add(new MvcFeature { RegisterRoutesEnabled = false, RegisterUrlHelper = ContainerType != DiType.Autofac });
         }
 
         public AppHostBase Run(IAppBuilder app)

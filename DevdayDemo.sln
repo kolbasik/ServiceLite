@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.NInject.Mvc5", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.NInject.WebApi2", "ServiceLite.NInject.WebApi2\ServiceLite.NInject.WebApi2.csproj", "{0D792EEA-EA31-4928-99E9-6860C362E952}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLite.AspNet", "ServiceLite.AspNet\ServiceLite.AspNet.csproj", "{B7D425D6-52DF-4C06-B6F0-1BB161A177DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{0D792EEA-EA31-4928-99E9-6860C362E952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D792EEA-EA31-4928-99E9-6860C362E952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D792EEA-EA31-4928-99E9-6860C362E952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D425D6-52DF-4C06-B6F0-1BB161A177DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D425D6-52DF-4C06-B6F0-1BB161A177DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D425D6-52DF-4C06-B6F0-1BB161A177DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D425D6-52DF-4C06-B6F0-1BB161A177DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

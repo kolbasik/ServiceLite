@@ -7,10 +7,11 @@ using ServiceLite.Core;
 
 namespace ServiceLite.Mvc5
 {
-    public sealed class MvcFeature : IPlugin
+    public sealed class MvcFeature : IPlugin, IConfigurable
     {
         public MvcFeature()
         {
+            RegisterUrlHelper = true;
             RegisterAllAreasEnabled = true;
             RegisterRoutesEnabled = true;
             RegisterBundlesEnabled = true;
@@ -25,6 +26,7 @@ namespace ServiceLite.Mvc5
             GlobalFilters = new List<FilterAttribute>();
         }
 
+        public bool RegisterUrlHelper { get; set; }
         public bool RegisterAllAreasEnabled { get; set; }
         public bool RegisterRoutesEnabled { get; set; }
         public bool RegisterBundlesEnabled { get; set; }
@@ -38,6 +40,17 @@ namespace ServiceLite.Mvc5
         public bool BundlesUseCdn { get; set; }
 
         public List<FilterAttribute> GlobalFilters { get; }
+
+
+        public void Configure(ConfigurationContext context)
+        {
+            var services = context.Services;
+
+            if (RegisterUrlHelper)
+            {
+                services.AddScoped<UrlHelper>(sp => new UrlHelper(sp.GetRequiredService<RequestContext>()));
+            }
+        }
 
         public void Start(StartContext context)
         {
