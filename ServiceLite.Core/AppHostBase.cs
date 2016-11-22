@@ -83,5 +83,13 @@ namespace ServiceLite.Core
                 throw new ApplicationException("Could not start AppHost.", ex);
             }
         }
+
+        public static void Release()
+        {
+            var appHost = Instance;
+            (appHost as IDisposable)?.Dispose();
+            (appHost?.Container as IDisposable)?.Dispose();
+            Instance = null;
+        }
     }
 }

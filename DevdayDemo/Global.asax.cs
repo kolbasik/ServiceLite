@@ -5,6 +5,7 @@ using DevdayDemo.Services;
 using Ninject;
 using Ninject.Web.Common;
 using NWebsec.Csp;
+using ServiceLite.Core;
 
 namespace DevdayDemo
 {
@@ -20,15 +21,24 @@ namespace DevdayDemo
 
         public void Application_Start()
         {
-            if (AppHost.ContainerType == AppHost.DiType.NInject)
-                lock (this)
+            lock (this)
+            {
+                if (AppHost.ContainerType == AppHost.DiType.NInject)
                 {
                     bootstrapper = new Bootstrapper();
                     bootstrapper?.Initialize(() => new StandardKernel());
                 }
+            }
         }
 
-        public void Application_End() => bootstrapper?.ShutDown();
+        public void Application_End()
+        {
+            lock (this)
+            {
+                AppHostBase.Release();
+                bootstrapper?.ShutDown();
+            }
+        }
 
         /// <summary>
         ///     Handles the Content Security Policy (CSP) violation errors. For more information see FilterConfig.
