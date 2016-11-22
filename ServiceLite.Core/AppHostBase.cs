@@ -7,6 +7,7 @@ namespace ServiceLite.Core
 {
     public abstract class AppHostBase : IAppHost
     {
+        public static readonly TraceSource Trace = new TraceSource(typeof(AppHostBase).FullName, SourceLevels.All);
         public static AppHostBase Instance;
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
@@ -79,7 +80,7 @@ namespace ServiceLite.Core
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Trace.TraceData(TraceEventType.Critical, -1, ex);
                 throw new ApplicationException("Could not start AppHost.", ex);
             }
         }
@@ -87,9 +88,21 @@ namespace ServiceLite.Core
         public static void Release()
         {
             var appHost = Instance;
-            (appHost as IDisposable)?.Dispose();
-            (appHost?.Container as IDisposable)?.Dispose();
+            Release(appHost);
+            Release(appHost?.Container);
             Instance = null;
+        }
+
+        public static void Release(object disposable)
+        {
+            try
+            {
+                (disposable as IDisposable)?.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceData(TraceEventType.Warning, -1, ex);
+            }
         }
     }
 }
