@@ -78,6 +78,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NinjectDataAnnotationsModelValidatorProvider.cs" />
+    <Compile Include="NinjectDependencyResolver.cs" />
+    <Compile Include="NinjectFilterAttributeFilterProvider.cs" />
     <Compile Include="NInjectMvc5Feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
