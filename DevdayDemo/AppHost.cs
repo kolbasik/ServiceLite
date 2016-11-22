@@ -5,7 +5,6 @@ using System.Web.Routing;
 using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
 using Ninject.Web.Common;
-using Ninject.Web.Mvc;
 using Owin;
 using ServiceLite.Autofac.Core;
 using ServiceLite.Autofac.Mvc5;
@@ -22,24 +21,51 @@ namespace DevdayDemo
 {
     internal sealed class AppHost : AppHostBase, IStartable
     {
+        public enum DiType
+        {
+            Autofac,
+            NInject
+        }
+
+        public static readonly DiType ContainerType = DiType.Autofac;
+
         public AppHost()
         {
-            Plugins.Add(new NInjectFeature());
-            Plugins.Add(new NInjectWebApiFeature());
-            Plugins.Add(new NInjectMvc5Feature());
-            //Plugins.Add(new AutofacFeature());
-            //Plugins.Add(new AutofacWebApiFeature());
-            //Plugins.Add(new AutofacMvcFeature());
+            switch (ContainerType)
+            {
+                case DiType.Autofac:
+                {
+                    Plugins.Add(new AutofacFeature());
+                    Plugins.Add(new AutofacWebApiFeature());
+                    Plugins.Add(new AutofacMvcFeature());
+                    break;
+                }
+                case DiType.NInject:
+                {
+                    Plugins.Add(new NInjectFeature());
+                    Plugins.Add(new NInjectWebApiFeature());
+                    Plugins.Add(new NInjectMvc5Feature());
+                    break;
+                }
+            }
             Plugins.Add(new WebApiFeature());
             Plugins.Add(new SwaggerFeature { ApiVersions = { { "v1", "Application V1" }, { "v2", "Application V2" } } });
             Plugins.Add(new MvcFeature { RegisterRoutesEnabled = false });
         }
 
-        //public AppHostBase Run(IAppBuilder app) => this.Set(app).Configure(new AutofacServiceCollection()).Start();
         public AppHostBase Run(IAppBuilder app)
         {
-            var kernel = new Bootstrapper().Kernel;
-            var services = new NInjectServiceCollection(kernel) { GetRequestScope = _ => HttpContext.Current };
+            IServiceCollection services = null;
+            switch (ContainerType)
+            {
+                case DiType.Autofac:
+                    services = new AutofacServiceCollection();
+                    break;
+                case DiType.NInject:
+                    var kernel = new Bootstrapper().Kernel;
+                    services = new NInjectServiceCollection(kernel) { GetRequestScope = _ => HttpContext.Current };
+                    break;
+            }
             return this.Set(app).Configure(services).Start();
         }
 
