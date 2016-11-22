@@ -2,27 +2,12 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Ninject;
-using Ninject.Web.Common;
 using ServiceLite.Core;
 
 namespace ServiceLite.NInject.Mvc5
 {
-    public sealed class NInjectMvc5Feature : IPlugin, IPreConfigurable, IConfigurable
+    public sealed class NInjectMvc5Feature : IPlugin, IConfigurable
     {
-        public static Bootstrapper Bootstrapper;
-
-        public void PreConfigure(ConfigurationContext context)
-        {
-            var bootstrapper = new Bootstrapper();
-            if (bootstrapper.Kernel == null)
-            {
-                var kernel = context.AppHost.GetRequired<IKernel>();
-                bootstrapper.Initialize(() => kernel);
-                Bootstrapper = bootstrapper;
-            }
-        }
-
         public void Configure(ConfigurationContext context)
         {
             var services = context.Services;

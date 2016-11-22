@@ -4,7 +4,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
-using Ninject.Web.Common;
 using Owin;
 using ServiceLite.Autofac.Core;
 using ServiceLite.Autofac.Mvc5;
@@ -27,7 +26,7 @@ namespace DevdayDemo
             NInject
         }
 
-        public static readonly DiType ContainerType = DiType.Autofac;
+        public static readonly DiType ContainerType = DiType.NInject;
 
         public AppHost()
         {
@@ -62,8 +61,7 @@ namespace DevdayDemo
                     services = new AutofacServiceCollection();
                     break;
                 case DiType.NInject:
-                    var kernel = new Bootstrapper().Kernel;
-                    services = new NInjectServiceCollection(kernel) { GetRequestScope = _ => HttpContext.Current };
+                    services = new NInjectServiceCollection(new Ninject.StandardKernel(), _ => HttpContext.Current);
                     break;
             }
             return this.Set(app).Configure(services).Start();

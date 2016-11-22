@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 namespace ServiceLite.Core
 {
@@ -10,17 +11,20 @@ namespace ServiceLite.Core
         public static readonly TraceSource Trace = new TraceSource(typeof(AppHostBase).FullName, SourceLevels.All);
         public static AppHostBase Instance;
 
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public AppHostBase()
         {
             Properties = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Plugins = new List<IPlugin>();
+            CancellationTokenSource = new CancellationTokenSource();
+            CancellationToken = CancellationTokenSource.Token;
             Instance = this;
         }
 
         public IDictionary<string, object> Properties { get; }
         public List<IPlugin> Plugins { get; }
         public IServiceProvider Container { get; private set; }
+        private CancellationTokenSource CancellationTokenSource { get; }
+        public CancellationToken CancellationToken { get; }
 
         [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
         public virtual AppHostBase Configure(IServiceCollection container)
@@ -87,10 +91,15 @@ namespace ServiceLite.Core
 
         public static void Release()
         {
-            var appHost = Instance;
-            Release(appHost);
-            Release(appHost?.Container);
+            Release(Instance);
             Instance = null;
+        }
+
+        public static void Release(AppHostBase appHost)
+        {
+            appHost?.CancellationTokenSource.Cancel();
+            Release(appHost as object);
+            Release(appHost?.Container);
         }
 
         public static void Release(object disposable)

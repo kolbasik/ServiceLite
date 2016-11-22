@@ -1,3 +1,4 @@
+using Ninject.Web.Common;
 using ServiceLite.Core;
 
 namespace ServiceLite.NInject.Core
@@ -7,6 +8,10 @@ namespace ServiceLite.NInject.Core
         public void PreConfigure(ConfigurationContext context)
         {
             var kernel = ((NInjectServiceCollection)context.Services).Kernel;
+
+            var bootstrapper = new Bootstrapper();
+            bootstrapper.Initialize(() => kernel);
+            context.AppHost.CancellationToken.Register(() => bootstrapper.ShutDown());
 
             context.AppHost.Set(kernel);
         }

@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using Ninject;
 using Ninject.Activation;
-using Ninject.Modules;
 using ServiceLite.Core;
 
 namespace ServiceLite.NInject.Core
@@ -11,18 +10,17 @@ namespace ServiceLite.NInject.Core
     {
         public readonly IKernel Kernel;
 
-        public NInjectServiceCollection(params INinjectModule[] modules) : this(new StandardKernel(modules))
-        {
-        }
-
-        public NInjectServiceCollection(IKernel kernel)
+        public NInjectServiceCollection(IKernel kernel, Func<IContext, object> getScope)
         {
             if (kernel == null)
                 throw new ArgumentNullException(nameof(kernel));
+            if (getScope == null)
+                throw new ArgumentNullException(nameof(getScope));
             Kernel = kernel;
+            GetScope = getScope;
         }
 
-        public Func<IContext, object> GetRequestScope { get; set; } = context => null;
+        public Func<IContext, object> GetScope { get; }
 
         [DebuggerHidden]
         [DebuggerNonUserCode]
@@ -45,7 +43,7 @@ namespace ServiceLite.NInject.Core
         [DebuggerStepThrough]
         public void AddScoped<TContract, TService>() where TService : TContract
         {
-            Kernel.Bind<TContract>().To<TService>().InScope(GetRequestScope);
+            Kernel.Bind<TContract>().To<TService>().InScope(GetScope);
         }
 
         [DebuggerHidden]
@@ -53,7 +51,7 @@ namespace ServiceLite.NInject.Core
         [DebuggerStepThrough]
         public void AddScoped<TService>(Func<IServiceProvider, TService> factory)
         {
-            Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InScope(GetRequestScope);
+            Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InScope(GetScope);
         }
 
         [DebuggerHidden]
