@@ -11,6 +11,10 @@ namespace ServiceLite.NInject.Core
     {
         public readonly IKernel Kernel;
 
+        public NInjectServiceCollection(params INinjectModule[] modules) : this(new StandardKernel(modules))
+        {
+        }
+
         public NInjectServiceCollection(IKernel kernel)
         {
             if (kernel == null)
@@ -18,56 +22,67 @@ namespace ServiceLite.NInject.Core
             Kernel = kernel;
         }
 
-        public NInjectServiceCollection(params INinjectModule[] modules)
-        {
-            Kernel = new StandardKernel(modules);
-        }
+        public Func<IContext, object> GetRequestScope { get; set; } = context => null;
 
-        public Func<IContext, object> InRequestScope { get; set; } = context => null;
-
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        [DebuggerHidden]
+        [DebuggerNonUserCode]
+        [DebuggerStepThrough]
         public void AddTransient<TContract, TService>() where TService : TContract
         {
             Kernel.Bind<TContract>().To<TService>().InTransientScope();
         }
 
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        [DebuggerHidden]
+        [DebuggerNonUserCode]
+        [DebuggerStepThrough]
         public void AddTransient<TService>(Func<IServiceProvider, TService> factory)
         {
             Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InTransientScope();
         }
 
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        [DebuggerHidden]
+        [DebuggerNonUserCode]
+        [DebuggerStepThrough]
         public void AddScoped<TContract, TService>() where TService : TContract
         {
-            Kernel.Bind<TContract>().To<TService>().InScope(InRequestScope);
+            Kernel.Bind<TContract>().To<TService>().InScope(GetRequestScope);
         }
 
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        [DebuggerHidden]
+        [DebuggerNonUserCode]
+        [DebuggerStepThrough]
         public void AddScoped<TService>(Func<IServiceProvider, TService> factory)
         {
-            Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InScope(InRequestScope);
+            Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InScope(GetRequestScope);
         }
 
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        [DebuggerHidden]
+        [DebuggerNonUserCode]
+        [DebuggerStepThrough]
         public void AddSingleton<TContract, TService>() where TService : TContract
         {
             Kernel.Bind<TContract>().To<TService>().InSingletonScope();
         }
 
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        [DebuggerHidden]
+        [DebuggerNonUserCode]
+        [DebuggerStepThrough]
         public void AddSingleton<TService>(Func<IServiceProvider, TService> factory)
         {
             Kernel.Bind<TService>().ToMethod(context => factory(context.Kernel)).InSingletonScope();
         }
 
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        [DebuggerHidden]
+        [DebuggerNonUserCode]
+        [DebuggerStepThrough]
         public void AddSingleton<TService>(TService service)
         {
             Kernel.Bind<TService>().ToConstant(service);
         }
 
-        [DebuggerHidden, DebuggerNonUserCode, DebuggerStepThrough]
+        [DebuggerHidden]
+        [DebuggerNonUserCode]
+        [DebuggerStepThrough]
         public IServiceProvider Build() => Kernel;
     }
 }

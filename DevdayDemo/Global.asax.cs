@@ -1,4 +1,5 @@
-﻿using Ninject.Web.Common;
+﻿using Ninject;
+using Ninject.Web.Common;
 
 namespace DevdayDemo
 {
@@ -7,14 +8,9 @@ namespace DevdayDemo
     using DevdayDemo.Services;
     using NWebsec.Csp;
 
-    public class Global : System.Web.HttpApplication
+    public class Global : NinjectHttpApplication // System.Web.HttpApplication
     {
-        public override void Init()
-        {
-            base.Init();
-            new OnePerRequestHttpModule().Init(this);
-
-        }
+        protected override IKernel CreateKernel() => new StandardKernel();
 
         /// <summary>
         /// Handles the Content Security Policy (CSP) violation errors. For more information see FilterConfig.

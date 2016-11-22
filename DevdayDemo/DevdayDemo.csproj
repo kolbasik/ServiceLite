@@ -119,6 +119,10 @@
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject.Web.WebApi, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NWebsec, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
       <HintPath>..\packages\NWebsec.4.2.0\lib\45\NWebsec.dll</HintPath>
       <Private>True</Private>
@@ -517,6 +521,10 @@
     <ProjectReference Include="..\ServiceLite.NInject.Mvc5\ServiceLite.NInject.Mvc5.csproj">
       <Project>{952211EF-D9F2-4EE4-91F4-5BA2737A97A5}</Project>
       <Name>ServiceLite.NInject.Mvc5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLite.NInject.WebApi2\ServiceLite.NInject.WebApi2.csproj">
+      <Project>{0D792EEA-EA31-4928-99E9-6860C362E952}</Project>
+      <Name>ServiceLite.NInject.WebApi2</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceLite.Swagger\ServiceLite.Swagger.csproj">
       <Project>{A2C7C6B6-6E4C-444E-BF59-0A5E698658C6}</Project>

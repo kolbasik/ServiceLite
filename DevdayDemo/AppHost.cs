@@ -4,6 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using DevdayDemo.Services;
 using DevdayDemo.Services.Random;
+using Ninject.Web.Common;
 using Ninject.Web.Mvc;
 using Owin;
 using ServiceLite.Autofac.Core;
@@ -13,6 +14,7 @@ using ServiceLite.Core;
 using ServiceLite.Mvc5;
 using ServiceLite.NInject.Core;
 using ServiceLite.NInject.Mvc5;
+using ServiceLite.NInject.WebApi2;
 using ServiceLite.Swagger;
 using ServiceLite.WebApi2;
 
@@ -23,6 +25,7 @@ namespace DevdayDemo
         public AppHost()
         {
             Plugins.Add(new NInjectFeature());
+            Plugins.Add(new NInjectWebApiFeature());
             Plugins.Add(new NInjectMvc5Feature());
             //Plugins.Add(new AutofacFeature());
             //Plugins.Add(new AutofacWebApiFeature());
@@ -33,7 +36,12 @@ namespace DevdayDemo
         }
 
         //public AppHostBase Run(IAppBuilder app) => this.Set(app).Configure(new AutofacServiceCollection()).Start();
-        public AppHostBase Run(IAppBuilder app) => this.Set(app).Configure(new NInjectServiceCollection { InRequestScope = x => HttpContext.Current }).Start();
+        public AppHostBase Run(IAppBuilder app)
+        {
+            var kernel = new Bootstrapper().Kernel;
+            var services = new NInjectServiceCollection(kernel) { GetRequestScope = _ => HttpContext.Current };
+            return this.Set(app).Configure(services).Start();
+        }
 
         protected override void ConfigureServices(IServiceCollection services)
         {
